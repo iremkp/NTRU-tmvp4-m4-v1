@@ -98,7 +98,6 @@ void owcpa_enc(unsigned char *c,
     poly *ct = &x3;
 
     poly_Rq_sum_zero_frombytes(h, pk);
-
     poly_S3_frombytes(r, rm);
     poly_Z3_to_Zq(r);
 

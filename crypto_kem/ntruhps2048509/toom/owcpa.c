@@ -43,7 +43,6 @@ void owcpa_samplemsg(unsigned char msg[NTRU_OWCPA_MSGBYTES],
     poly r, m;
 
     sample_rm(&r, &m, seed);
-
     poly_S3_tobytes(msg, &r);
     poly_S3_tobytes(msg + NTRU_PACK_TRINARY_BYTES, &m);
 }

@@ -14,6 +14,15 @@ typedef struct {
     uint16_t coeffs[NTRU_N];
 } poly;
 
+typedef struct {
+    uint16_t coeffs1[176];
+} poly176;
+
+typedef struct {
+    uint16_t coeffs2[351];
+} poly351;
+
+void poly_176_mul_tmvp(poly176 *r, const poly351 *a, const poly176 *b);
 
 void poly_Sq_tobytes(unsigned char *r, const poly *a);
 void poly_Sq_frombytes(poly *r, const unsigned char *a);
@@ -27,6 +36,7 @@ void poly_S3_frombytes(poly *r, const unsigned char msg[NTRU_PACK_TRINARY_BYTES]
 void poly_Sq_mul(poly *r, const poly *a, const poly *b);
 void poly_SignedZ3_Sq_mul(poly *r, const poly *a, const poly *b);
 void poly_Rq_mul(poly *r, const poly *a, const poly *b);
+void poly_Rq_mul_tmvp(poly *r, const poly *a, const poly *b);
 void poly_SignedZ3_Rq_mul(poly *r, const poly *a, const poly *b);
 void poly_Rq_mul_x_minus_1(poly *r, const poly *a);
 void poly_S3_mul(poly *r, const poly *a, const poly *b);

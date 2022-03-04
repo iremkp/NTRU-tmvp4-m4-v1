@@ -1,4 +1,3 @@
-
   .syntax unified
   .cpu cortex-m4
   .thumb
@@ -246,9 +245,12 @@
   .align 2
   asm_tmvp128x128:
   push {lr}
-  push {r2}
-  push {r1} 
-  sub sp, sp, #1600 
+  //push {r2}
+  //push {r1} 
+  vmov.w s0, r0
+  vmov.w s1, r1
+  vmov.w s2, r2
+  sub.w sp, sp, #1600 
   //Eval A
    
   //-- 1
@@ -1144,40 +1146,40 @@
   
   add r1, sp, #1184					// A7-A8-A9+A10-A11+A12+A13-A14
   bl asm_tmvp16x16_SB_new
-  add r0, r0, #32
-  sub r1, r1, #32
-  add r2, r2, #32
+  add.w r0, r0, #32
+  sub.w r1, r1, #32
+  add.w r2, r2, #32
   bl asm_tmvp16x16_SB_new
-  add r0, r0, #32
-  sub r1, r1, #32
-  add r2, r2, #32
+  add.w r0, r0, #32
+  sub.w r1, r1, #32
+  add.w r2, r2, #32
   bl asm_tmvp16x16_SB_new
-  add r0, r0, #32
-  sub r1, r1, #32
-  add r2, r2, #32
+  add.w r0, r0, #32
+  sub.w r1, r1, #32
+  add.w r2, r2, #32
   bl asm_tmvp16x16_SB_new
-  add r0, r0, #32
-  sub r1, r1, #32
-  add r2, r2, #32
+  add.w r0, r0, #32
+  sub.w r1, r1, #32
+  add.w r2, r2, #32
   bl asm_tmvp16x16_SB_new
-  add r0, r0, #32
-  sub r1, r1, #32
-  add r2, r2, #32
+  add.w r0, r0, #32
+  sub.w r1, r1, #32
+  add.w r2, r2, #32
   bl asm_tmvp16x16_SB_new
-  add r0, r0, #32
-  sub r1, r1, #32
-  add r2, r2, #32
+  add.w r0, r0, #32
+  sub.w r1, r1, #32
+  add.w r2, r2, #32
   bl asm_tmvp16x16_SB_new
-  add r0, r0, #32
-  sub r1, r1, #32
-  add r2, r2, #32
+  add.w r0, r0, #32
+  sub.w r1, r1, #32
+  add.w r2, r2, #32
   bl asm_tmvp16x16_SB_new
   
-  sub r0, r0, #224
-  sub r2, r2, #224  
+  sub.w r0, r0, #224
+  sub.w r2, r2, #224  
   
   //Eval B
-   //-- 1
+     //-- 1
 
   ldr.w r3, [r2, #0]
   ldr.w r4, [r2, #32]
@@ -1198,17 +1200,17 @@
   uadd16 r8, r8, r10
   uadd16 r9, r9, r10
   uadd16 r10, r7, r8
-  str.w r3, [sp, #1280]
+  str.w r3, [sp, #1216]
   str.w r4, [sp, #1248]
-  str.w r5, [sp, #1216]
-  str.w r6, [sp, #1184]
-  str.w r7, [sp, #1344]
-  str.w r8, [sp, #1312]
-  str.w r9, [sp, #1376]
-  str.w r10, [sp, #1120]
-  str.w r11, [sp, #1536]
-  str.w r12, [sp, #1472]
-  str.w r14, [sp, #1440]
+  str.w r5, [sp, #1280]
+  str.w r6, [sp, #1312]
+  str.w r7, [sp, #1152]
+  str.w r8, [sp, #1184]
+  str.w r9, [sp, #1120]
+  str.w r10, [sp, #1376]
+  str.w r11, [sp, #960]
+  str.w r12, [sp, #1024]
+  str.w r14, [sp, #1056]
   uadd16 r3, r3, r5
   uadd16 r4, r4, r6
   uadd16 r5, r5, r6
@@ -1217,14 +1219,14 @@
   uadd16 r8, r3, r4
   usub16 r9, r6, r11
   uadd16 r10, r7, r11
-  str.w r3, [sp, #1024]
-  str.w r4, [sp, #992]
-  str.w r5, [sp, #1056]
-  str.w r6, [sp, #1152]
-  str.w r7, [sp, #1408]
-  str.w r8, [sp, #960]
-  str.w r9, [sp, #1504]
-  str.w r10, [sp, #1088]
+  str.w r3, [sp, #1472]
+  str.w r4, [sp, #1504]
+  str.w r5, [sp, #1440]
+  str.w r6, [sp, #1344]
+  str.w r7, [sp, #1088]
+  str.w r8, [sp, #1536]
+  str.w r9, [sp, #992]
+  str.w r10, [sp, #1408]
   //-- 2
 
   ldr.w r3, [r2, #4]
@@ -1246,17 +1248,17 @@
   uadd16 r8, r8, r10
   uadd16 r9, r9, r10
   uadd16 r10, r7, r8
-  str.w r3, [sp, #1284]
+  str.w r3, [sp, #1220]
   str.w r4, [sp, #1252]
-  str.w r5, [sp, #1220]
-  str.w r6, [sp, #1188]
-  str.w r7, [sp, #1348]
-  str.w r8, [sp, #1316]
-  str.w r9, [sp, #1380]
-  str.w r10, [sp, #1124]
-  str.w r11, [sp, #1540]
-  str.w r12, [sp, #1476]
-  str.w r14, [sp, #1444]
+  str.w r5, [sp, #1284]
+  str.w r6, [sp, #1316]
+  str.w r7, [sp, #1156]
+  str.w r8, [sp, #1188]
+  str.w r9, [sp, #1124]
+  str.w r10, [sp, #1380]
+  str.w r11, [sp, #964]
+  str.w r12, [sp, #1028]
+  str.w r14, [sp, #1060]
   uadd16 r3, r3, r5
   uadd16 r4, r4, r6
   uadd16 r5, r5, r6
@@ -1265,14 +1267,14 @@
   uadd16 r8, r3, r4
   usub16 r9, r6, r11
   uadd16 r10, r7, r11
-  str.w r3, [sp, #1028]
-  str.w r4, [sp, #996]
-  str.w r5, [sp, #1060]
-  str.w r6, [sp, #1156]
-  str.w r7, [sp, #1412]
-  str.w r8, [sp, #964]
-  str.w r9, [sp, #1508]
-  str.w r10, [sp, #1092]
+  str.w r3, [sp, #1476]
+  str.w r4, [sp, #1508]
+  str.w r5, [sp, #1444]
+  str.w r6, [sp, #1348]
+  str.w r7, [sp, #1092]
+  str.w r8, [sp, #1540]
+  str.w r9, [sp, #996]
+  str.w r10, [sp, #1412]
   //-- 3
 
   ldr.w r3, [r2, #8]
@@ -1294,17 +1296,17 @@
   uadd16 r8, r8, r10
   uadd16 r9, r9, r10
   uadd16 r10, r7, r8
-  str.w r3, [sp, #1288]
+  str.w r3, [sp, #1224]
   str.w r4, [sp, #1256]
-  str.w r5, [sp, #1224]
-  str.w r6, [sp, #1192]
-  str.w r7, [sp, #1352]
-  str.w r8, [sp, #1320]
-  str.w r9, [sp, #1384]
-  str.w r10, [sp, #1128]
-  str.w r11, [sp, #1544]
-  str.w r12, [sp, #1480]
-  str.w r14, [sp, #1448]
+  str.w r5, [sp, #1288]
+  str.w r6, [sp, #1320]
+  str.w r7, [sp, #1160]
+  str.w r8, [sp, #1192]
+  str.w r9, [sp, #1128]
+  str.w r10, [sp, #1384]
+  str.w r11, [sp, #968]
+  str.w r12, [sp, #1032]
+  str.w r14, [sp, #1064]
   uadd16 r3, r3, r5
   uadd16 r4, r4, r6
   uadd16 r5, r5, r6
@@ -1313,14 +1315,14 @@
   uadd16 r8, r3, r4
   usub16 r9, r6, r11
   uadd16 r10, r7, r11
-  str.w r3, [sp, #1032]
-  str.w r4, [sp, #1000]
-  str.w r5, [sp, #1064]
-  str.w r6, [sp, #1160]
-  str.w r7, [sp, #1416]
-  str.w r8, [sp, #968]
-  str.w r9, [sp, #1512]
-  str.w r10, [sp, #1096]
+  str.w r3, [sp, #1480]
+  str.w r4, [sp, #1512]
+  str.w r5, [sp, #1448]
+  str.w r6, [sp, #1352]
+  str.w r7, [sp, #1096]
+  str.w r8, [sp, #1544]
+  str.w r9, [sp, #1000]
+  str.w r10, [sp, #1416]
   //-- 4
 
   ldr.w r3, [r2, #12]
@@ -1342,17 +1344,17 @@
   uadd16 r8, r8, r10
   uadd16 r9, r9, r10
   uadd16 r10, r7, r8
-  str.w r3, [sp, #1292]
+  str.w r3, [sp, #1228]
   str.w r4, [sp, #1260]
-  str.w r5, [sp, #1228]
-  str.w r6, [sp, #1196]
-  str.w r7, [sp, #1356]
-  str.w r8, [sp, #1324]
-  str.w r9, [sp, #1388]
-  str.w r10, [sp, #1132]
-  str.w r11, [sp, #1548]
-  str.w r12, [sp, #1484]
-  str.w r14, [sp, #1452]
+  str.w r5, [sp, #1292]
+  str.w r6, [sp, #1324]
+  str.w r7, [sp, #1164]
+  str.w r8, [sp, #1196]
+  str.w r9, [sp, #1132]
+  str.w r10, [sp, #1388]
+  str.w r11, [sp, #972]
+  str.w r12, [sp, #1036]
+  str.w r14, [sp, #1068]
   uadd16 r3, r3, r5
   uadd16 r4, r4, r6
   uadd16 r5, r5, r6
@@ -1361,14 +1363,14 @@
   uadd16 r8, r3, r4
   usub16 r9, r6, r11
   uadd16 r10, r7, r11
-  str.w r3, [sp, #1036]
-  str.w r4, [sp, #1004]
-  str.w r5, [sp, #1068]
-  str.w r6, [sp, #1164]
-  str.w r7, [sp, #1420]
-  str.w r8, [sp, #972]
-  str.w r9, [sp, #1516]
-  str.w r10, [sp, #1100]
+  str.w r3, [sp, #1484]
+  str.w r4, [sp, #1516]
+  str.w r5, [sp, #1452]
+  str.w r6, [sp, #1356]
+  str.w r7, [sp, #1100]
+  str.w r8, [sp, #1548]
+  str.w r9, [sp, #1004]
+  str.w r10, [sp, #1420]
   //-- 5
 
   ldr.w r3, [r2, #16]
@@ -1390,17 +1392,17 @@
   uadd16 r8, r8, r10
   uadd16 r9, r9, r10
   uadd16 r10, r7, r8
-  str.w r3, [sp, #1296]
+  str.w r3, [sp, #1232]
   str.w r4, [sp, #1264]
-  str.w r5, [sp, #1232]
-  str.w r6, [sp, #1200]
-  str.w r7, [sp, #1360]
-  str.w r8, [sp, #1328]
-  str.w r9, [sp, #1392]
-  str.w r10, [sp, #1136]
-  str.w r11, [sp, #1552]
-  str.w r12, [sp, #1488]
-  str.w r14, [sp, #1456]
+  str.w r5, [sp, #1296]
+  str.w r6, [sp, #1328]
+  str.w r7, [sp, #1168]
+  str.w r8, [sp, #1200]
+  str.w r9, [sp, #1136]
+  str.w r10, [sp, #1392]
+  str.w r11, [sp, #976]
+  str.w r12, [sp, #1040]
+  str.w r14, [sp, #1072]
   uadd16 r3, r3, r5
   uadd16 r4, r4, r6
   uadd16 r5, r5, r6
@@ -1409,14 +1411,14 @@
   uadd16 r8, r3, r4
   usub16 r9, r6, r11
   uadd16 r10, r7, r11
-  str.w r3, [sp, #1040]
-  str.w r4, [sp, #1008]
-  str.w r5, [sp, #1072]
-  str.w r6, [sp, #1168]
-  str.w r7, [sp, #1424]
-  str.w r8, [sp, #976]
-  str.w r9, [sp, #1520]
-  str.w r10, [sp, #1104]
+  str.w r3, [sp, #1488]
+  str.w r4, [sp, #1520]
+  str.w r5, [sp, #1456]
+  str.w r6, [sp, #1360]
+  str.w r7, [sp, #1104]
+  str.w r8, [sp, #1552]
+  str.w r9, [sp, #1008]
+  str.w r10, [sp, #1424]
   //-- 6
 
   ldr.w r3, [r2, #20]
@@ -1438,17 +1440,17 @@
   uadd16 r8, r8, r10
   uadd16 r9, r9, r10
   uadd16 r10, r7, r8
-  str.w r3, [sp, #1300]
+  str.w r3, [sp, #1236]
   str.w r4, [sp, #1268]
-  str.w r5, [sp, #1236]
-  str.w r6, [sp, #1204]
-  str.w r7, [sp, #1364]
-  str.w r8, [sp, #1332]
-  str.w r9, [sp, #1396]
-  str.w r10, [sp, #1140]
-  str.w r11, [sp, #1556]
-  str.w r12, [sp, #1492]
-  str.w r14, [sp, #1460]
+  str.w r5, [sp, #1300]
+  str.w r6, [sp, #1332]
+  str.w r7, [sp, #1172]
+  str.w r8, [sp, #1204]
+  str.w r9, [sp, #1140]
+  str.w r10, [sp, #1396]
+  str.w r11, [sp, #980]
+  str.w r12, [sp, #1044]
+  str.w r14, [sp, #1076]
   uadd16 r3, r3, r5
   uadd16 r4, r4, r6
   uadd16 r5, r5, r6
@@ -1457,14 +1459,14 @@
   uadd16 r8, r3, r4
   usub16 r9, r6, r11
   uadd16 r10, r7, r11
-  str.w r3, [sp, #1044]
-  str.w r4, [sp, #1012]
-  str.w r5, [sp, #1076]
-  str.w r6, [sp, #1172]
-  str.w r7, [sp, #1428]
-  str.w r8, [sp, #980]
-  str.w r9, [sp, #1524]
-  str.w r10, [sp, #1108]
+  str.w r3, [sp, #1492]
+  str.w r4, [sp, #1524]
+  str.w r5, [sp, #1460]
+  str.w r6, [sp, #1364]
+  str.w r7, [sp, #1108]
+  str.w r8, [sp, #1556]
+  str.w r9, [sp, #1012]
+  str.w r10, [sp, #1428]
   //-- 7
 
   ldr.w r3, [r2, #24]
@@ -1486,17 +1488,17 @@
   uadd16 r8, r8, r10
   uadd16 r9, r9, r10
   uadd16 r10, r7, r8
-  str.w r3, [sp, #1304]
+  str.w r3, [sp, #1240]
   str.w r4, [sp, #1272]
-  str.w r5, [sp, #1240]
-  str.w r6, [sp, #1208]
-  str.w r7, [sp, #1368]
-  str.w r8, [sp, #1336]
-  str.w r9, [sp, #1400]
-  str.w r10, [sp, #1144]
-  str.w r11, [sp, #1560]
-  str.w r12, [sp, #1496]
-  str.w r14, [sp, #1464]
+  str.w r5, [sp, #1304]
+  str.w r6, [sp, #1336]
+  str.w r7, [sp, #1176]
+  str.w r8, [sp, #1208]
+  str.w r9, [sp, #1144]
+  str.w r10, [sp, #1400]
+  str.w r11, [sp, #984]
+  str.w r12, [sp, #1048]
+  str.w r14, [sp, #1080]
   uadd16 r3, r3, r5
   uadd16 r4, r4, r6
   uadd16 r5, r5, r6
@@ -1505,14 +1507,14 @@
   uadd16 r8, r3, r4
   usub16 r9, r6, r11
   uadd16 r10, r7, r11
-  str.w r3, [sp, #1048]
-  str.w r4, [sp, #1016]
-  str.w r5, [sp, #1080]
-  str.w r6, [sp, #1176]
-  str.w r7, [sp, #1432]
-  str.w r8, [sp, #984]
-  str.w r9, [sp, #1528]
-  str.w r10, [sp, #1112]
+  str.w r3, [sp, #1496]
+  str.w r4, [sp, #1528]
+  str.w r5, [sp, #1464]
+  str.w r6, [sp, #1368]
+  str.w r7, [sp, #1112]
+  str.w r8, [sp, #1560]
+  str.w r9, [sp, #1016]
+  str.w r10, [sp, #1432]
   //-- 8
 
   ldr.w r3, [r2, #28]
@@ -1534,17 +1536,17 @@
   uadd16 r8, r8, r10
   uadd16 r9, r9, r10
   uadd16 r10, r7, r8
-  str.w r3, [sp, #1308]
+  str.w r3, [sp, #1244]
   str.w r4, [sp, #1276]
-  str.w r5, [sp, #1244]
-  str.w r6, [sp, #1212]
-  str.w r7, [sp, #1372]
-  str.w r8, [sp, #1340]
-  str.w r9, [sp, #1404]
-  str.w r10, [sp, #1148]
-  str.w r11, [sp, #1564]
-  str.w r12, [sp, #1500]
-  str.w r14, [sp, #1468]
+  str.w r5, [sp, #1308]
+  str.w r6, [sp, #1340]
+  str.w r7, [sp, #1180]
+  str.w r8, [sp, #1212]
+  str.w r9, [sp, #1148]
+  str.w r10, [sp, #1404]
+  str.w r11, [sp, #988]
+  str.w r12, [sp, #1052]
+  str.w r14, [sp, #1084]
   uadd16 r3, r3, r5
   uadd16 r4, r4, r6
   uadd16 r5, r5, r6
@@ -1553,98 +1555,99 @@
   uadd16 r8, r3, r4
   usub16 r9, r6, r11
   uadd16 r10, r7, r11
-  str.w r3, [sp, #1052]
-  str.w r4, [sp, #1020]
-  str.w r5, [sp, #1084]
-  str.w r6, [sp, #1180]
-  str.w r7, [sp, #1436]
-  str.w r8, [sp, #988]
-  str.w r9, [sp, #1532]
-  str.w r10, [sp, #1116]
+  str.w r3, [sp, #1500]
+  str.w r4, [sp, #1532]
+  str.w r5, [sp, #1468]
+  str.w r6, [sp, #1372]
+  str.w r7, [sp, #1116]
+  str.w r8, [sp, #1564]
+  str.w r9, [sp, #1020]
+  str.w r10, [sp, #1436]
   
-  ldr.w r1, [sp, #1600]
-  add r1, r1, #224
-  add r2, sp, #960
+
+  vmov.w r1, s1
+  add.w r1, r1, #224
+  add.w r2, sp, #1536
   
-  push {r0}   
-  add r0, sp, #1572
+  //push {r0}   
+  add.w r0, sp, #1568
   bl asm_tmvp16x16_SB_new		//S1
-  add r1, sp, #4
-  add r2, r2, #32
-  sub r0, r0, #608
+  add.w r1, sp, #0
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S2
-  add r1, r1, #32
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #32
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S3
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S4
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S7
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S10
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S19
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S5		
-  add r1, r1, #32
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #32
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S6
-  add r1, r1, #32
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #32
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S8
-  add r1, r1, #32
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #32
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S9
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S11
-  add r1, r1, #32
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #32
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S12
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S13
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S16			
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S20
-  add r1, r1, #32
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #32
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S21
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S22
-  add r1, r1, #64
-  add r2, r2, #32
-  add r0, r0, #32
+  add.w r1, r1, #64
+  sub.w r2, r2, #32
+  sub.w r0, r0, #32
   bl asm_tmvp16x16_SB_new		//S25
-  pop {r0}
-    
+  //pop {r0}
+    vmov.w r0, s0
   //---- recomb. Si 
-  //-- 1
+   //-- 1
 
   ldr.w r3, [r0, #0]
   ldr.w r4, [r0, #32]
@@ -1655,8 +1658,8 @@
   ldr.w r9, [r0, #192]
   ldr.w r10, [r0, #224]
   ldr.w r11, [sp, #1568]
-  ldr.w r12, [sp, #960]
-  ldr.w r14, [sp, #992]
+  ldr.w r12, [sp, #1536]
+  ldr.w r14, [sp, #1504]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r14, r3
@@ -1667,17 +1670,17 @@
   usub16 r8, r12, r8
   usub16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1024]
-  ldr.w r12, [sp, #1152]
-  ldr.w r14, [sp, #1184]
+  ldr.w r11, [sp, #1472]
+  ldr.w r12, [sp, #1344]
+  ldr.w r14, [sp, #1312]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r5, r14, r5
   uadd16 r6, r12, r6
   uadd16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1056]
-  ldr.w r12, [sp, #1216]
+  ldr.w r11, [sp, #1440]
+  ldr.w r12, [sp, #1280]
   ldr.w r14, [sp, #1248]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
@@ -1685,32 +1688,32 @@
   usub16 r4, r4, r12
   usub16 r7, r7, r14
   usub16 r8, r8, r12
-  ldr.w r11, [sp, #1088]
-  ldr.w r12, [sp, #1280]
-  ldr.w r14, [sp, #1312]
+  ldr.w r11, [sp, #1408]
+  ldr.w r12, [sp, #1216]
+  ldr.w r14, [sp, #1184]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r7, r7, r14
   uadd16 r8, r8, r12
   uadd16 r9, r9, r14
   uadd16 r10, r10, r12
-  ldr.w r11, [sp, #1120]
-  ldr.w r12, [sp, #1408]
-  ldr.w r14, [sp, #1440]
+  ldr.w r11, [sp, #1376]
+  ldr.w r12, [sp, #1088]
+  ldr.w r14, [sp, #1056]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r3, r14
   usub16 r4, r4, r12
   usub16 r5, r5, r14
   usub16 r6, r6, r12
-  ldr.w r11, [sp, #1344]
-  ldr.w r12, [sp, #1376]
+  ldr.w r11, [sp, #1152]
+  ldr.w r12, [sp, #1120]
   usub16 r7, r7, r12
   usub16 r8, r8, r12
   uadd16 r9, r9, r11
   uadd16 r10, r10, r11
-  ldr.w r11, [sp, #1472]
-  ldr.w r12, [sp, #1504]
+  ldr.w r11, [sp, #1024]
+  ldr.w r12, [sp, #992]
   uadd16 r3, r3, r12
   uadd16 r4, r4, r12
   usub16 r5, r5, r11
@@ -1734,8 +1737,8 @@
   ldr.w r9, [r0, #196]
   ldr.w r10, [r0, #228]
   ldr.w r11, [sp, #1572]
-  ldr.w r12, [sp, #964]
-  ldr.w r14, [sp, #996]
+  ldr.w r12, [sp, #1540]
+  ldr.w r14, [sp, #1508]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r14, r3
@@ -1746,17 +1749,17 @@
   usub16 r8, r12, r8
   usub16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1028]
-  ldr.w r12, [sp, #1156]
-  ldr.w r14, [sp, #1188]
+  ldr.w r11, [sp, #1476]
+  ldr.w r12, [sp, #1348]
+  ldr.w r14, [sp, #1316]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r5, r14, r5
   uadd16 r6, r12, r6
   uadd16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1060]
-  ldr.w r12, [sp, #1220]
+  ldr.w r11, [sp, #1444]
+  ldr.w r12, [sp, #1284]
   ldr.w r14, [sp, #1252]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
@@ -1764,32 +1767,32 @@
   usub16 r4, r4, r12
   usub16 r7, r7, r14
   usub16 r8, r8, r12
-  ldr.w r11, [sp, #1092]
-  ldr.w r12, [sp, #1284]
-  ldr.w r14, [sp, #1316]
+  ldr.w r11, [sp, #1412]
+  ldr.w r12, [sp, #1220]
+  ldr.w r14, [sp, #1188]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r7, r7, r14
   uadd16 r8, r8, r12
   uadd16 r9, r9, r14
   uadd16 r10, r10, r12
-  ldr.w r11, [sp, #1124]
-  ldr.w r12, [sp, #1412]
-  ldr.w r14, [sp, #1444]
+  ldr.w r11, [sp, #1380]
+  ldr.w r12, [sp, #1092]
+  ldr.w r14, [sp, #1060]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r3, r14
   usub16 r4, r4, r12
   usub16 r5, r5, r14
   usub16 r6, r6, r12
-  ldr.w r11, [sp, #1348]
-  ldr.w r12, [sp, #1380]
+  ldr.w r11, [sp, #1156]
+  ldr.w r12, [sp, #1124]
   usub16 r7, r7, r12
   usub16 r8, r8, r12
   uadd16 r9, r9, r11
   uadd16 r10, r10, r11
-  ldr.w r11, [sp, #1476]
-  ldr.w r12, [sp, #1508]
+  ldr.w r11, [sp, #1028]
+  ldr.w r12, [sp, #996]
   uadd16 r3, r3, r12
   uadd16 r4, r4, r12
   usub16 r5, r5, r11
@@ -1813,8 +1816,8 @@
   ldr.w r9, [r0, #200]
   ldr.w r10, [r0, #232]
   ldr.w r11, [sp, #1576]
-  ldr.w r12, [sp, #968]
-  ldr.w r14, [sp, #1000]
+  ldr.w r12, [sp, #1544]
+  ldr.w r14, [sp, #1512]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r14, r3
@@ -1825,17 +1828,17 @@
   usub16 r8, r12, r8
   usub16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1032]
-  ldr.w r12, [sp, #1160]
-  ldr.w r14, [sp, #1192]
+  ldr.w r11, [sp, #1480]
+  ldr.w r12, [sp, #1352]
+  ldr.w r14, [sp, #1320]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r5, r14, r5
   uadd16 r6, r12, r6
   uadd16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1064]
-  ldr.w r12, [sp, #1224]
+  ldr.w r11, [sp, #1448]
+  ldr.w r12, [sp, #1288]
   ldr.w r14, [sp, #1256]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
@@ -1843,32 +1846,32 @@
   usub16 r4, r4, r12
   usub16 r7, r7, r14
   usub16 r8, r8, r12
-  ldr.w r11, [sp, #1096]
-  ldr.w r12, [sp, #1288]
-  ldr.w r14, [sp, #1320]
+  ldr.w r11, [sp, #1416]
+  ldr.w r12, [sp, #1224]
+  ldr.w r14, [sp, #1192]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r7, r7, r14
   uadd16 r8, r8, r12
   uadd16 r9, r9, r14
   uadd16 r10, r10, r12
-  ldr.w r11, [sp, #1128]
-  ldr.w r12, [sp, #1416]
-  ldr.w r14, [sp, #1448]
+  ldr.w r11, [sp, #1384]
+  ldr.w r12, [sp, #1096]
+  ldr.w r14, [sp, #1064]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r3, r14
   usub16 r4, r4, r12
   usub16 r5, r5, r14
   usub16 r6, r6, r12
-  ldr.w r11, [sp, #1352]
-  ldr.w r12, [sp, #1384]
+  ldr.w r11, [sp, #1160]
+  ldr.w r12, [sp, #1128]
   usub16 r7, r7, r12
   usub16 r8, r8, r12
   uadd16 r9, r9, r11
   uadd16 r10, r10, r11
-  ldr.w r11, [sp, #1480]
-  ldr.w r12, [sp, #1512]
+  ldr.w r11, [sp, #1032]
+  ldr.w r12, [sp, #1000]
   uadd16 r3, r3, r12
   uadd16 r4, r4, r12
   usub16 r5, r5, r11
@@ -1892,8 +1895,8 @@
   ldr.w r9, [r0, #204]
   ldr.w r10, [r0, #236]
   ldr.w r11, [sp, #1580]
-  ldr.w r12, [sp, #972]
-  ldr.w r14, [sp, #1004]
+  ldr.w r12, [sp, #1548]
+  ldr.w r14, [sp, #1516]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r14, r3
@@ -1904,17 +1907,17 @@
   usub16 r8, r12, r8
   usub16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1036]
-  ldr.w r12, [sp, #1164]
-  ldr.w r14, [sp, #1196]
+  ldr.w r11, [sp, #1484]
+  ldr.w r12, [sp, #1356]
+  ldr.w r14, [sp, #1324]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r5, r14, r5
   uadd16 r6, r12, r6
   uadd16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1068]
-  ldr.w r12, [sp, #1228]
+  ldr.w r11, [sp, #1452]
+  ldr.w r12, [sp, #1292]
   ldr.w r14, [sp, #1260]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
@@ -1922,32 +1925,32 @@
   usub16 r4, r4, r12
   usub16 r7, r7, r14
   usub16 r8, r8, r12
-  ldr.w r11, [sp, #1100]
-  ldr.w r12, [sp, #1292]
-  ldr.w r14, [sp, #1324]
+  ldr.w r11, [sp, #1420]
+  ldr.w r12, [sp, #1228]
+  ldr.w r14, [sp, #1196]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r7, r7, r14
   uadd16 r8, r8, r12
   uadd16 r9, r9, r14
   uadd16 r10, r10, r12
-  ldr.w r11, [sp, #1132]
-  ldr.w r12, [sp, #1420]
-  ldr.w r14, [sp, #1452]
+  ldr.w r11, [sp, #1388]
+  ldr.w r12, [sp, #1100]
+  ldr.w r14, [sp, #1068]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r3, r14
   usub16 r4, r4, r12
   usub16 r5, r5, r14
   usub16 r6, r6, r12
-  ldr.w r11, [sp, #1356]
-  ldr.w r12, [sp, #1388]
+  ldr.w r11, [sp, #1164]
+  ldr.w r12, [sp, #1132]
   usub16 r7, r7, r12
   usub16 r8, r8, r12
   uadd16 r9, r9, r11
   uadd16 r10, r10, r11
-  ldr.w r11, [sp, #1484]
-  ldr.w r12, [sp, #1516]
+  ldr.w r11, [sp, #1036]
+  ldr.w r12, [sp, #1004]
   uadd16 r3, r3, r12
   uadd16 r4, r4, r12
   usub16 r5, r5, r11
@@ -1971,8 +1974,8 @@
   ldr.w r9, [r0, #208]
   ldr.w r10, [r0, #240]
   ldr.w r11, [sp, #1584]
-  ldr.w r12, [sp, #976]
-  ldr.w r14, [sp, #1008]
+  ldr.w r12, [sp, #1552]
+  ldr.w r14, [sp, #1520]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r14, r3
@@ -1983,17 +1986,17 @@
   usub16 r8, r12, r8
   usub16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1040]
-  ldr.w r12, [sp, #1168]
-  ldr.w r14, [sp, #1200]
+  ldr.w r11, [sp, #1488]
+  ldr.w r12, [sp, #1360]
+  ldr.w r14, [sp, #1328]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r5, r14, r5
   uadd16 r6, r12, r6
   uadd16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1072]
-  ldr.w r12, [sp, #1232]
+  ldr.w r11, [sp, #1456]
+  ldr.w r12, [sp, #1296]
   ldr.w r14, [sp, #1264]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
@@ -2001,32 +2004,32 @@
   usub16 r4, r4, r12
   usub16 r7, r7, r14
   usub16 r8, r8, r12
-  ldr.w r11, [sp, #1104]
-  ldr.w r12, [sp, #1296]
-  ldr.w r14, [sp, #1328]
+  ldr.w r11, [sp, #1424]
+  ldr.w r12, [sp, #1232]
+  ldr.w r14, [sp, #1200]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r7, r7, r14
   uadd16 r8, r8, r12
   uadd16 r9, r9, r14
   uadd16 r10, r10, r12
-  ldr.w r11, [sp, #1136]
-  ldr.w r12, [sp, #1424]
-  ldr.w r14, [sp, #1456]
+  ldr.w r11, [sp, #1392]
+  ldr.w r12, [sp, #1104]
+  ldr.w r14, [sp, #1072]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r3, r14
   usub16 r4, r4, r12
   usub16 r5, r5, r14
   usub16 r6, r6, r12
-  ldr.w r11, [sp, #1360]
-  ldr.w r12, [sp, #1392]
+  ldr.w r11, [sp, #1168]
+  ldr.w r12, [sp, #1136]
   usub16 r7, r7, r12
   usub16 r8, r8, r12
   uadd16 r9, r9, r11
   uadd16 r10, r10, r11
-  ldr.w r11, [sp, #1488]
-  ldr.w r12, [sp, #1520]
+  ldr.w r11, [sp, #1040]
+  ldr.w r12, [sp, #1008]
   uadd16 r3, r3, r12
   uadd16 r4, r4, r12
   usub16 r5, r5, r11
@@ -2050,8 +2053,8 @@
   ldr.w r9, [r0, #212]
   ldr.w r10, [r0, #244]
   ldr.w r11, [sp, #1588]
-  ldr.w r12, [sp, #980]
-  ldr.w r14, [sp, #1012]
+  ldr.w r12, [sp, #1556]
+  ldr.w r14, [sp, #1524]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r14, r3
@@ -2062,17 +2065,17 @@
   usub16 r8, r12, r8
   usub16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1044]
-  ldr.w r12, [sp, #1172]
-  ldr.w r14, [sp, #1204]
+  ldr.w r11, [sp, #1492]
+  ldr.w r12, [sp, #1364]
+  ldr.w r14, [sp, #1332]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r5, r14, r5
   uadd16 r6, r12, r6
   uadd16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1076]
-  ldr.w r12, [sp, #1236]
+  ldr.w r11, [sp, #1460]
+  ldr.w r12, [sp, #1300]
   ldr.w r14, [sp, #1268]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
@@ -2080,32 +2083,32 @@
   usub16 r4, r4, r12
   usub16 r7, r7, r14
   usub16 r8, r8, r12
-  ldr.w r11, [sp, #1108]
-  ldr.w r12, [sp, #1300]
-  ldr.w r14, [sp, #1332]
+  ldr.w r11, [sp, #1428]
+  ldr.w r12, [sp, #1236]
+  ldr.w r14, [sp, #1204]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r7, r7, r14
   uadd16 r8, r8, r12
   uadd16 r9, r9, r14
   uadd16 r10, r10, r12
-  ldr.w r11, [sp, #1140]
-  ldr.w r12, [sp, #1428]
-  ldr.w r14, [sp, #1460]
+  ldr.w r11, [sp, #1396]
+  ldr.w r12, [sp, #1108]
+  ldr.w r14, [sp, #1076]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r3, r14
   usub16 r4, r4, r12
   usub16 r5, r5, r14
   usub16 r6, r6, r12
-  ldr.w r11, [sp, #1364]
-  ldr.w r12, [sp, #1396]
+  ldr.w r11, [sp, #1172]
+  ldr.w r12, [sp, #1140]
   usub16 r7, r7, r12
   usub16 r8, r8, r12
   uadd16 r9, r9, r11
   uadd16 r10, r10, r11
-  ldr.w r11, [sp, #1492]
-  ldr.w r12, [sp, #1524]
+  ldr.w r11, [sp, #1044]
+  ldr.w r12, [sp, #1012]
   uadd16 r3, r3, r12
   uadd16 r4, r4, r12
   usub16 r5, r5, r11
@@ -2129,8 +2132,8 @@
   ldr.w r9, [r0, #216]
   ldr.w r10, [r0, #248]
   ldr.w r11, [sp, #1592]
-  ldr.w r12, [sp, #984]
-  ldr.w r14, [sp, #1016]
+  ldr.w r12, [sp, #1560]
+  ldr.w r14, [sp, #1528]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r14, r3
@@ -2141,17 +2144,17 @@
   usub16 r8, r12, r8
   usub16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1048]
-  ldr.w r12, [sp, #1176]
-  ldr.w r14, [sp, #1208]
+  ldr.w r11, [sp, #1496]
+  ldr.w r12, [sp, #1368]
+  ldr.w r14, [sp, #1336]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r5, r14, r5
   uadd16 r6, r12, r6
   uadd16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1080]
-  ldr.w r12, [sp, #1240]
+  ldr.w r11, [sp, #1464]
+  ldr.w r12, [sp, #1304]
   ldr.w r14, [sp, #1272]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
@@ -2159,32 +2162,32 @@
   usub16 r4, r4, r12
   usub16 r7, r7, r14
   usub16 r8, r8, r12
-  ldr.w r11, [sp, #1112]
-  ldr.w r12, [sp, #1304]
-  ldr.w r14, [sp, #1336]
+  ldr.w r11, [sp, #1432]
+  ldr.w r12, [sp, #1240]
+  ldr.w r14, [sp, #1208]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r7, r7, r14
   uadd16 r8, r8, r12
   uadd16 r9, r9, r14
   uadd16 r10, r10, r12
-  ldr.w r11, [sp, #1144]
-  ldr.w r12, [sp, #1432]
-  ldr.w r14, [sp, #1464]
+  ldr.w r11, [sp, #1400]
+  ldr.w r12, [sp, #1112]
+  ldr.w r14, [sp, #1080]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r3, r14
   usub16 r4, r4, r12
   usub16 r5, r5, r14
   usub16 r6, r6, r12
-  ldr.w r11, [sp, #1368]
-  ldr.w r12, [sp, #1400]
+  ldr.w r11, [sp, #1176]
+  ldr.w r12, [sp, #1144]
   usub16 r7, r7, r12
   usub16 r8, r8, r12
   uadd16 r9, r9, r11
   uadd16 r10, r10, r11
-  ldr.w r11, [sp, #1496]
-  ldr.w r12, [sp, #1528]
+  ldr.w r11, [sp, #1048]
+  ldr.w r12, [sp, #1016]
   uadd16 r3, r3, r12
   uadd16 r4, r4, r12
   usub16 r5, r5, r11
@@ -2208,8 +2211,8 @@
   ldr.w r9, [r0, #220]
   ldr.w r10, [r0, #252]
   ldr.w r11, [sp, #1596]
-  ldr.w r12, [sp, #988]
-  ldr.w r14, [sp, #1020]
+  ldr.w r12, [sp, #1564]
+  ldr.w r14, [sp, #1532]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r14, r3
@@ -2220,17 +2223,17 @@
   usub16 r8, r12, r8
   usub16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1052]
-  ldr.w r12, [sp, #1180]
-  ldr.w r14, [sp, #1212]
+  ldr.w r11, [sp, #1500]
+  ldr.w r12, [sp, #1372]
+  ldr.w r14, [sp, #1340]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r5, r14, r5
   uadd16 r6, r12, r6
   uadd16 r9, r14, r9
   uadd16 r10, r12, r10
-  ldr.w r11, [sp, #1084]
-  ldr.w r12, [sp, #1244]
+  ldr.w r11, [sp, #1468]
+  ldr.w r12, [sp, #1308]
   ldr.w r14, [sp, #1276]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
@@ -2238,32 +2241,32 @@
   usub16 r4, r4, r12
   usub16 r7, r7, r14
   usub16 r8, r8, r12
-  ldr.w r11, [sp, #1116]
-  ldr.w r12, [sp, #1308]
-  ldr.w r14, [sp, #1340]
+  ldr.w r11, [sp, #1436]
+  ldr.w r12, [sp, #1244]
+  ldr.w r14, [sp, #1212]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   uadd16 r7, r7, r14
   uadd16 r8, r8, r12
   uadd16 r9, r9, r14
   uadd16 r10, r10, r12
-  ldr.w r11, [sp, #1148]
-  ldr.w r12, [sp, #1436]
-  ldr.w r14, [sp, #1468]
+  ldr.w r11, [sp, #1404]
+  ldr.w r12, [sp, #1116]
+  ldr.w r14, [sp, #1084]
   uadd16 r12, r12, r11
   usub16 r14, r11, r14
   usub16 r3, r3, r14
   usub16 r4, r4, r12
   usub16 r5, r5, r14
   usub16 r6, r6, r12
-  ldr.w r11, [sp, #1372]
-  ldr.w r12, [sp, #1404]
+  ldr.w r11, [sp, #1180]
+  ldr.w r12, [sp, #1148]
   usub16 r7, r7, r12
   usub16 r8, r8, r12
   uadd16 r9, r9, r11
   uadd16 r10, r10, r11
-  ldr.w r11, [sp, #1500]
-  ldr.w r12, [sp, #1532]
+  ldr.w r11, [sp, #1052]
+  ldr.w r12, [sp, #1020]
   uadd16 r3, r3, r12
   uadd16 r4, r4, r12
   usub16 r5, r5, r11
@@ -2278,8 +2281,10 @@
   str.w r3, [r0, #252]
   
   add sp, #1600
-  pop {r1}
-  pop {r2}
+  //pop {r1}
+  //pop {r2}
+  vmov.w r1, s1
+  vmov.w r2, s2
   pop {pc}
   
   
@@ -2288,7 +2293,7 @@
 .align 2
 asm_polymul_509_512:
   push {r4-r11, lr}
-  sub sp, #5120  
+  sub.w sp, #5120  
  
   //----first eval A--------
       //-- 1
@@ -9585,7 +9590,7 @@ asm_polymul_509_512:
   //uadd16 r11, r11, r3
   //uadd16 r11, r11, r11
   eor r11, r11, r11
-  //usub16 r11, r11, r11
+  //uadd16 r11, r11, r11
   usub16 r11, r11, r14
   str.w r11, [sp, #508]
   uadd16 r10, r10, r10
@@ -9654,7 +9659,7 @@ asm_polymul_509_512:
   str.w r10, [sp, #2556]
   //----first eval A ends--------
   
-  add r3, sp, #3584
+  add.w r3, sp, #3584
   
   
   //firstevalB
@@ -11709,8 +11714,6 @@ asm_polymul_509_512:
   ldr.w r5, [r2, #504]
   ldr.w r6, [r2, #760]
   ldrh.w r7, [r2, #1016]
-  eor r8, r8, r8
-  pkhbt r7, r7, r8
   str.w r7, [r3, #1528]
   uadd16 r14, r4, r6
   uadd16 r12, r5, r7
@@ -11777,37 +11780,36 @@ asm_polymul_509_512:
   
 
  
-  add r1, sp, #2
-  sub sp, #256
+  add.w r1, sp, #2
+  sub.w sp, #256
   push {r0}  
-  add r0, sp, #4
+  add.w r0, sp, #4
   bl asm_tmvp128x128	  
-  add r0, r0, #256
-  add r1, r1, #512							
-  add r2, sp, #3844
+  add.w r0, r0, #256
+  add.w r1, r1, #512							
+  add.w r2, sp, #3844
   bl asm_tmvp128x128		
-  add r0, r0, #256
-  add r1, r1, #512
-  add r2, r2, #256
+  add.w r0, r0, #256
+  add.w r1, r1, #512
+  add.w r2, r2, #256
   bl asm_tmvp128x128		
-  add r0, r0, #256
-  add r1, r1, #512
-  add r2, r2, #256
+  add.w r0, r0, #256
+  add.w r1, r1, #512
+  add.w r2, r2, #256
   bl asm_tmvp128x128	
-  add r0, r0, #256
-  add r1, r1, #512
-  add r2, r2, #256
+  add.w r0, r0, #256
+  add.w r1, r1, #512
+  add.w r2, r2, #256
   bl asm_tmvp128x128		
-  add r0, r0, #256
-  add r1, r1, #512
-  add r2, r2, #256
+  add.w r0, r0, #256
+  add.w r1, r1, #512
+  add.w r2, r2, #256
   bl asm_tmvp128x128
-  add r0, r0, #256
-  add r1, r1, #512
-  add r2, r2, #256
+  add.w r0, r0, #256
+  add.w r1, r1, #512
+  add.w r2, r2, #256
   bl asm_tmvp128x128	  
   pop {r0}
-  
   
   movw r12, #43691
   movw r14, #52429
@@ -11818,7 +11820,7 @@ asm_polymul_509_512:
   ldr.w r7, [sp, #1024]					//P4
   ldr.w r8, [sp, #1280]					//P5
   ldr.w r9, [sp, #1536]					//P6
-  ldr.w r3, [sp], #4						//P0
+  ldr.w r3, [sp], #4							//P0
   lsl r3, r3, #1
   and r3, r3, #0xfffefffe					// r3 =2M0  
   lsl r10, r4, #1
@@ -16118,13 +16120,13 @@ asm_polymul_509_512:
   smulbb r11, r8, r14
   smultb r8, r8, r14
   pkhbt r8, r11, r8, lsl #16  
-  uadd16 r3, r3, r7
-  uadd16 r10, r8, r5
-  uadd16 r3, r10, r3  
-  smulbb r11, r3, r12
-  smultb r3, r3, r12
-  pkhbt r3, r11, r3, lsl #16  
-  lsr r3, r3, #3 
+  //uadd16 r3, r3, r7
+  //uadd16 r10, r8, r5
+  //uadd16 r3, r10, r3  
+  //smulbb r11, r3, r12
+  //smultb r3, r3, r12
+  //pkhbt r3, r11, r3, lsl #16  
+  //lsr r3, r3, #3 
   //and r3, r3, #0x07ff07ff
   //str.w r3, [r0, #768]  
   lsl r3, r8, #1
@@ -16164,6 +16166,6 @@ asm_polymul_509_512:
   pkhbt r10, r3, r10, lsl #16  
   uadd16 r10, r10, r9
   and r10, r10, #0x07ff07ff
-  str.w r10, [r0], #4
-  add sp, #5120
+  str.w r10, [r0]
+  add.w sp, #5120
   pop {r4-r11, pc}

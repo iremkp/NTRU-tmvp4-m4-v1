@@ -6,125 +6,133 @@
   .type asm_tmvp11x11_SB, %function
   .align 2
   asm_tmvp11x11_SB:
-  push {r2, lr}  
+  push {lr}  
+  vmov s3, r2  
   ldr r3, [r2, #0]
   ldr.w r4, [r2, #4]
   ldr.w r5, [r2, #8]
   ldr.w r6, [r2, #12] 
   ldr.w r7, [r2, #16] 
-  ldr.w r8, [r2, #20]
+  ldrh.w r8, [r2, #20]
   ldr.w r9, [r1, #0]
   ldr.w r10, [r1, #4]
   ldr.w r11, [r1, #8]
   ldr.w r12, [r1, #12]
-  ldr.w r14, [r1, #16]
+  ldr.w r14, [r1, #16]  
+  pkhbt r2, r10, r9
+  vmov.w s4, r2
+  vmov.w s9, r9
   ldr.w r2, [r1, #20]  
-  
-  smultb r9, r9, r8
+  //smultb r9, r9, r8
+  smuadx r9, r9, r8
   smladx r9, r10, r7, r9
   smladx r9, r11, r6, r9
   smladx r9, r12, r5, r9
   smladx r9, r14, r4, r9
   smladx r9, r2, r3, r9
-  strh r9, [r0, #2]
-  
-  ldr r9, [r1, #24]
-  smultb r10,  r10, r8
+  strh.w r9, [r0, #2]
+  pkhbt r9, r11, r10
+  vmov.w s5, r9
+  ldr.w r9, [r1, #24]
+  //smultb r10, r10, r8
+  smuadx r10, r10, r8
   smladx r10, r11, r7, r10
   smladx r10, r12, r6, r10
   smladx r10, r14, r5, r10
   smladx r10, r2, r4, r10
   smladx r10, r9, r3, r10
-  strh r10, [r0, #6]
+  strh.w r10, [r0, #6]
+  pkhbt r10, r12, r11
+  vmov.w s6, r10
   ldr.w r10, [r1, #28]
-  
-  smultb r11, r11, r8
+  //smultb r11, r11, r8
+  smuadx r11, r11, r8
   smladx r11, r12, r7, r11
   smladx r11, r14, r6, r11
   smladx r11, r2, r5, r11
   smladx r11, r9, r4, r11
   smladx r11, r10, r3, r11
-  strh r11, [r0, #10]
+  strh.w r11, [r0, #10]
+  pkhbt r11, r14, r12
+  vmov.w s7, r11
   ldr.w r11, [r1, #32]
-  smultb r12, r12, r8
+  //smultb r12, r12, r8
+  smuadx r12, r12, r8
   smladx r12, r14, r7, r12
   smladx r12, r2, r6, r12
   smladx r12, r9, r5, r12
   smladx r12, r10, r4, r12
   smladx r12, r11, r3, r12
-  strh r12, [r0, #14]
+  strh.w r12, [r0, #14]
+  pkhbt r12, r2, r14
+  vmov.w s8, r12
   ldr.w r12, [r1, #36]
-  smultb r14, r14, r8
+ // smultb r14, r14, r8
+ smuadx r14, r14, r8
   smladx r14, r2, r7, r14
   smladx r14, r9, r6, r14
   smladx r14, r10, r5, r14
   smladx r14, r11, r4, r14
   smladx r14, r12, r3, r14
-  strh r14, [r0, #18]
+  strh.w r14, [r0, #18]
+  ldrh.w r14, [r1, #40]  
+  pkhbt r14, r14, r12
+  pkhbt r12, r12, r11
+  pkhbt r11, r11, r10
+  pkhbt r10, r10, r9
+  pkhbt r9, r9, r2
+  vmov.w r2, s8
+  smuad r14, r14, r3
+  smlad r14, r12, r4, r14
+  smlad r14, r11, r5, r14
+  smlad r14, r10, r6, r14
+  smlad r14, r9, r7, r14
+  smlad r14, r2, r8, r14
+  strh.w r14, [r0, #20]
+  vmov.w r14, s7
+  smuad r12, r12, r3
+  smlad r12, r11, r4, r12
+  smlad r12, r10, r5, r12
+  smlad r12, r9, r6, r12
+  smlad r12, r2, r7, r12
+  smlad r12, r14, r8, r12
+  strh.w r12, [r0, #16]
+  vmov.w r12, s6
+  smuad r11, r11, r3
+  smlad r11, r10, r4, r11
+  smlad r11, r9, r5, r11
+  smlad r11, r2, r6, r11
+  smlad r11, r14, r7, r11
+  smlad r11, r12, r8, r11
+  strh.w r11, [r0, #12]
+  vmov.w r11, s5
+  smuad r10, r10, r3
+  smlad r10, r9, r4, r10
+  smlad r10, r2, r5, r10
+  smlad r10, r14, r6, r10
+  smlad r10, r12, r7, r10
+  smlad r10, r11, r8, r10
+  strh.w r10, [r0, #8]
+  vmov r10, s4
+  smuad r9, r9, r3
+  smlad r9, r2, r4, r9
+  smlad r9, r14, r5, r9
+  smlad r9, r12, r6, r9
+  smlad r9, r11, r7, r9
+  smlad r9, r10, r8, r9
+  strh.w r9, [r0, #4]
   
-  ldrh r9, [r1], #2
-  ldr.w r10, [r1, #0]
-  ldr.w r11, [r1, #4]
-  ldr.w r12, [r1, #8]
-  ldr.w r14, [r1, #12]
-  ldr.w r2, [r1, #16]
+  vmov.w r9, s9
+  smuad r2, r2, r3
+  smlad r2, r14, r4, r2
+  smlad r2, r12, r5, r2
+  smlad r2, r11, r6, r2
+  smlad r2, r10, r7, r2
+  smlad r2, r9, r8, r2
+  strh.w r2, [r0, #0]
   
-  smulbb r9, r9, r8
-  smladx r9, r10, r7, r9
-  smladx r9, r11, r6, r9
-  smladx r9, r12, r5, r9
-  smladx r9, r14, r4, r9
-  smladx r9, r2, r3, r9
-  strh.w r9, [r0, #0]
-  ldr.w r9, [r1, #20]
-  
-  smultb r10, r10, r8
-  smladx r10, r11, r7, r10
-  smladx r10, r12, r6, r10
-  smladx r10, r14, r5, r10
-  smladx r10, r2, r4, r10
-  smladx r10, r9, r3, r10
-  strh.w r10, [r0, #4]
-  ldr.w r10, [r1, #24]
-  
-  smultb r11, r11, r8
-  smladx r11, r12, r7, r11
-  smladx r11, r14, r6, r11
-  smladx r11, r2, r5, r11
-  smladx r11, r9, r4, r11
-  smladx r11, r10, r3, r11
-  strh.w r11, [r0, #8]
-  ldr.w r11, [r1, #28]
-  
-  smultb r12, r12, r8
-  smladx r12, r14, r7, r12
-  smladx r12, r2, r6, r12
-  smladx r12, r9, r5, r12
-  smladx r12, r10, r4, r12
-  smladx r12, r11, r3, r12
-  strh.w r12, [r0, #12]
-  ldr.w r12, [r1, #32]
-  
-  smultb r14, r14, r8
-  smladx r14, r2, r7, r14
-  smladx r14, r9, r6, r14
-  smladx r14, r10, r5, r14
-  smladx r14, r11, r4, r14
-  smladx r14, r12, r3, r14
-  strh.w r14, [r0, #16]
-  ldr.w r14, [r1, #36]
-  
-  smultb r2, r2, r8
-  smladx r2, r9, r7, r2
-  smladx r2, r10, r6, r2
-  smladx r2, r11, r5, r2
-  smladx r2, r12, r4, r2
-  smladx r2, r14, r3, r2
-  strh.w r2, [r0, #20]
-  
-  sub r1, #2
-  
-  pop {r2, pc}
+  vmov.w r2, s3
+  pop {pc}
 
 
   .global asm_tmvp176x176
@@ -132,15 +140,18 @@
   .align 2
   asm_tmvp176x176:
   
-  push {r0-r2, lr} 
-  sub sp, sp, #3900
-  add sp, #68
+  push {lr} 
+  vmov.w s0, r0
+  vmov.w s1, r1
+  vmov.w s2, r2
+  sub sp, sp, #3832
+  //add sp, #48
 
   //------------eval A starts here----------------------
   
   //-- 1
 
-  ldr.w r2, [r1, #0]
+  ldr r2, [r1, #0]
   ldr.w r3, [r1, #22]
   ldr.w r4, [r1, #44]
   ldr.w r5, [r1, #66]
@@ -2271,7 +2282,8 @@
   
   //--------------eval A ends here----------------
  
-  ldr.w r2, [sp, #3840]				// r2 <--- B
+  //ldr.w r2, [sp, #3840]				// r2 <--- B
+  vmov.w r2, s2
  
   add r0, r0, #330
   add r1, sp,  #2596
@@ -3475,8 +3487,9 @@
   //-----------eval B ends--------
   
   add r2, sp, #1536
-  sub r0, sp, #2340
-  ldr.w r1, [sp, #1564]
+  sub r0, sp, #2320
+  //ldr.w r1, [sp, #1564]
+  vmov.w r1, s1
   add r1, #330
   
   bl asm_tmvp11x11_SB				// S 1
@@ -3738,8 +3751,9 @@
   bl asm_tmvp11x11_SB				// S 79
 
   
-  ldr r0, [sp, #1560]
-  sub sp, #2340
+  //ldr r0, [sp, #1560]
+  vmov.w r0, s0
+  sub sp, #2320
   
   //----recomb Si starts----------------------
 //---- 1
@@ -5329,11 +5343,11 @@
 
   //----recomb Si ends--------
 
-  add sp,  #3900
-  
-  //pop {r2}
-  //pop {r1}
-  pop {r0-r2, pc}
+  add sp,  #3880
+  vmov.w r1, s1
+  vmov.w r2, s2
+
+  pop {pc}
 
 
   .global asm_polymul_701_704
@@ -18380,18 +18394,13 @@
   str.w r10, [sp, #3520]
   
   //-----first eval A ends------
-//sub sp, #4
   
   pop {r2}
   add r1, sp, #2
   sub sp, #352
   push {r0}
   add r0, sp, #4
-  
-  //sub r1, sp, #3518
-  
-  //ldr.w r2, [r2, #3528]
-  
+
   bl asm_tmvp176x176	  
   add r0, r0, #352
   add r1, r1, #704							
@@ -18417,14 +18426,9 @@
   add r0, r0, #352
   add r1, r1, #704
   add r2, r2, #352
-  bl asm_tmvp176x176	  
-  
+  bl asm_tmvp176x176	    
   pop {r0}
   
- // ldr.w r0, [sp, #3520]
-  
-  ///sub sp, #3872
-  //sub sp, #352
   movw r12, #43691
   movw r14, #52429
   
@@ -24437,7 +24441,7 @@
   ldr.w r7, [sp, #1408]					
   ldr.w r8, [sp, #1760]					
   ldr.w r9, [sp, #2112]					
-  ldr.w r3, [sp], #4						
+  ldr.w r3, [sp], #4					
   lsl r3, r3, #1
   and r3, r3, #0xfffefffe					
   lsl r10, r4, #1
@@ -24498,8 +24502,6 @@
   pkhbt r10, r3, r10, lsl #16					
   uadd16 r10, r10, r9							
   and r10, r10, #0x1fff1fff
-  str.w r10, [r0], #4
-  
- //add sp, #352
+  str.w r10, [r0]
   add sp, #7040
   pop {r4-r11, pc}

@@ -109,23 +109,19 @@ static int test_keys(void) {
   
   #ifdef TOOM
   FILL_STACK()
-  polymul_asm(z, x, y);
+  poly_Rq_mul(z, x, y);
   CHECK_STACK()
   if(c >= canary_size) return -1; 
   stack_toom_polymul = c;
   #elif defined NTT
   FILL_STACK()
-  //mul_509(z, x, y);
-  //Good_mul_768(z, x, y);
-  //mixed_radix_NTT_mul_864(z, x, y);
-  //polymul_asm(z, x, y);
   poly_SignedZ3_Rq_mul(z, x, y);
   CHECK_STACK()
   if(c >= canary_size) return -1; 
   stack_ntt_polymul = c;
   #else
   FILL_STACK()  
- asm_polymul_701_704(z, x, y);
+  poly_Rq_mul(z, x, y);
   CHECK_STACK()
   if(c >= canary_size) return -1; 
   stack_tmvp_polymul = c;
@@ -140,12 +136,12 @@ static int test_keys(void) {
 	send_stack_usage("cpa key gen stack usage", stack_key_gen_cpa);
     send_stack_usage("encryption stack usage", stack_enc_cpa);
     send_stack_usage("decryption cpa stack usage", stack_dec_cpa);
-	#ifdef TMVP
-	send_stack_usage("tmvp polymul stack usage:", stack_tmvp_polymul);
+	#ifdef TOOM
+	send_stack_usage("toom polymul stack usage:", stack_toom_polymul);
 	#elif defined NTT
 	send_stack_usage("ntt polymul stack usage:", stack_ntt_polymul);
 	#else
-	send_stack_usage("toom polymul stack usage:", stack_toom_polymul);
+	send_stack_usage("tmvp polymul stack usage:", stack_tmvp_polymul);
   #endif
     send_USART_str("OK KEYS\n");
     return 0;

@@ -61,7 +61,7 @@ all:
 	@echo
 	@echo "If you really want to use it, please specify IMPLEMENTATION_PATH=path/to/impl"
 	@echo "and a target binary, e.g.,"
-	@echo "make IMPLEMENTATION_PATH=crypto_kem/saber/m4 bin/crypto_kem_saber_m4_test.bin"
+	@echo "make IMPLEMENTATION_PATH=crypto_kem/ntruhps2048509/tmvp bin/crypto_kem_ntruhps2048509_tmvp_test.bin"
 	@echo "make clean also works"
 
 $(DEST_HOST)/%_testvectors: $(COMMONSOURCES_HOST) $(IMPLEMENTATION_SOURCES) $(IMPLEMENTATION_HEADERS)

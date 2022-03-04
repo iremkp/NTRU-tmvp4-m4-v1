@@ -32,10 +32,9 @@ void poly_trinary_Zq_to_Z3(poly *r) {
         r->coeffs[i] = 3 & (r->coeffs[i] ^ (r->coeffs[i] >> (NTRU_LOGQ - 1)));
     }
 }
-extern void asm_polymul_701_704(uint16_t *h, const uint16_t *f, const uint16_t *g);
+extern void asm_polymul_701_720(uint16_t *h, const uint16_t *f, const uint16_t *g);
 void poly_Rq_mul(poly *r, const poly *a, const poly *b) {
- //uint16_t rtmp[2 * NTRU_N - 1];
-  asm_polymul_701_704(r->coeffs, a->coeffs, b->coeffs);
+  asm_polymul_701_720(r->coeffs, a->coeffs, b->coeffs);
 }
 
 void poly_Sq_mul(poly *r, const poly *a, const poly *b) {

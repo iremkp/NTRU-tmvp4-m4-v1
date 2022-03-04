@@ -21,9 +21,9 @@ def run_bench(scheme, impl, iterations):
     subprocess.check_call(f"make clean", shell=True)
     binary = f"bin/crypto_kem_{scheme}_{impl}_speed.bin"
     make = f"make IMPLEMENTATION_PATH=crypto_kem/{scheme}/{impl} CRYPTO_ITERATIONS={iterations} {binary}"
-    if impl == "toom":
-        make = f"CFLAGS=-DTOOM=1 {make}"
-    subprocess.check_call(make, shell=True)
+    #if impl == "toom":
+      #  make = f"CFLAGS=-DTOOM=1 {make}"
+    subprocess.check_call(make, shell=True)    
 
     try:
         subprocess.check_call(f"st-flash write {binary} 0x8000000", shell=True)
@@ -114,37 +114,28 @@ def bench(scheme, texName, impl, iterations, outfile, ignoreErrors=False):
 
 
 with open(f"benchmarks.tex", "a") as outfile:
-    iterations = 100
+    iterations = 1
 
     now = datetime.datetime.now(datetime.timezone.utc)
     print(f"% Benchmarking measurements written on {now}; iterations={iterations}\n", file=outfile)
-    #bench("lightsaber", "lightsaber", "m4", iterations, outfile)
-    #bench("saber", "saber", "m4", iterations, outfile)
-    #bench("firesaber", "firesaber", "m4", iterations, outfile)
-
-    #bench("ntruhrss701", "ntruhrss", "m4", iterations, outfile)
-    bench("ntruhps2048509", "ntruhpsI", "ntt", iterations, outfile)
-    #bench("ntruhps2048677", "ntruhpsIII", "m4", iterations, outfile)
-    #bench("ntruhps4096821", "ntruhpsV", "m4", iterations, outfile)
-
-    #bench("lac-128-v3a", "lacI", "m4", iterations, outfile)
-    #bench("lac-192-v3a", "lacIII", "m4", iterations, outfile)
-    #bench("lac-256-v3a", "lacV", "m4", iterations, outfile)
-
-    print(f"% Benchmarking old toom4 implementations from pqm4 to obtain CPA cycle counts", file=outfile)
-   # bench("lightsaber", "lightsabertoom", "toom", iterations, outfile, True)
-    #bench("saber", "sabertoom", "toom", iterations, outfile, True)
-    #bench("firesaber", "firesabertoom", "toom", iterations, outfile, True)
-
-
-    #bench("ntruhrss701", "ntruhrsstoom", "toom", iterations, outfile)
-    bench("ntruhps2048509", "ntruhpsItoom", "toom", iterations, outfile)
-    #bench("ntruhps2048677", "ntruhpsIIItoom", "toom", iterations, outfile)
-    #bench("ntruhps4096821", "ntruhpsVtoom", "toom", iterations, outfile)
-
-    #bench("lac-128-v3a", "lacIold", "old", iterations, outfile)
-    #bench("lac-192-v3a", "lacIIIold", "old", iterations, outfile)
-    #bench("lac-256-v3a", "lacVold", "old", iterations, outfile)
     
-    print(f"% Benchmarking old toom4 implementations from pqm4 to obtain CPA cycle counts", file=outfile)
-    bench("ntruhps2048509", "ntruhpsItoom", "tmvp", iterations, outfile)
+    print(f"% Benchmarking tmvp implementations to obtain CPA cycle counts", file=outfile)    
+    bench("ntruhps2048509", "ntruhpsI", "tmvp", iterations, outfile)
+    bench("ntruhps2048677", "ntruhpsIII", "tmvp", iterations, outfile)
+    bench("ntruhrss701", "ntruhrss", "tmvp", iterations, outfile)
+    bench("ntruhps4096821", "ntruhpsV", "tmvp", iterations, outfile)
+    
+    print(f"% Benchmarking ntt implementations to obtain CPA cycle counts", file=outfile)    
+    bench("ntruhps2048509", "ntruhpsI", "ntt", iterations, outfile)
+    bench("ntruhps2048677", "ntruhpsIII", "ntt", iterations, outfile)
+    bench("ntruhrss701", "ntruhrss", "ntt", iterations, outfile)
+    bench("ntruhps4096821", "ntruhpsV", "ntt", iterations, outfile)
+
+    print(f"% Benchmarking toom4 implementations to obtain CPA cycle counts", file=outfile)    
+    bench("ntruhps2048509", "ntruhpsI", "toom", iterations, outfile)
+    bench("ntruhps2048677", "ntruhpsIII", "toom", iterations, outfile)
+    bench("ntruhrss701", "ntruhrss", "toom", iterations, outfile)
+    bench("ntruhps4096821", "ntruhpsV", "toom", iterations, outfile)
+
+    
+  
